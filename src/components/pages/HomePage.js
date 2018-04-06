@@ -8,10 +8,4 @@ const HomePage = () => (
         </div>
     );
 
-/* HomePage.displayName = 'HomePage';
-
-HomePage.propTypes = {
-    className: PropTypes.string,
-}; */
-
 export default HomePage;
