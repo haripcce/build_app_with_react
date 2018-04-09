@@ -4,11 +4,11 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const UserRoute = ({isAuthenticated, component:Component, ...rest}) => (
-       <Route {...rest} render={props => isAuthenticated?  <Component {...props} /> : <Redirect to="/" /> } /> 
+const GuestRoute = ({isAuthenticated, component:Component, ...rest}) => (
+       <Route {...rest} render={props => !isAuthenticated?  <Component {...props} /> : <Redirect to="/dashboard" /> } /> 
  );
 
-UserRoute.propTypes = {
+GuestRoute.propTypes = {
     component: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired
 };
@@ -18,4 +18,4 @@ return {
 	isAuthenticated: !!state.user.token
 }
 }
-export default connect(mapStateToProps)(UserRoute);
+export default connect(mapStateToProps)(GuestRoute);

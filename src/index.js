@@ -1,6 +1,6 @@
 import 'semantic-ui-css/semantic.min.css';
 
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter,Route } from 'react-router-dom';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import React from 'react';
@@ -25,7 +25,7 @@ if(localStorage.bookwormJWT){
 
 ReactDOM.render(
 	<BrowserRouter>
-	<Provider store={store}><App /></Provider>
+	<Provider store={store}><Route component={App} /></Provider>
 	</BrowserRouter>, 
 	document.getElementById('root'));
 registerServiceWorker();
