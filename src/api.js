@@ -11,6 +11,8 @@ export default {
 		reset_PasswordRequest : ({email}) => 
 		axios.post('/users/reset_password_request', {email}),
 		validate_token:(token) => 
-		axios.post('/users/validate_token', {token})
+		axios.post('/users/validate_token', {token}),
+		reset_password:(data) => 
+		axios.post('/users/reset_password', data)
 	}
 }

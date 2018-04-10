@@ -4,14 +4,16 @@ import React, { Component } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { validateToken } from '../../actions/auth';
+import { resetPassword, validateToken } from '../../actions/auth';
+import ResetPasswordForm from '../forms/ResetPasswordForm';
 
 class ResetPasswordPage extends Component {
 
-		state = {
+	state = {
 			loading:true,
 			success:false
-		}
+	}
+	submit = (data) => this.props.resetPassword(data).then(() => this.props.history.push("/login"));
 
 	componentDidMount(){
 		this.props.validateToken(this.props.match.params.token)
@@ -21,10 +23,12 @@ class ResetPasswordPage extends Component {
 
     render() {
     	const {loading , success} = this.state;
+    	const token = this.props.match.params.token;
+
         return (
             <div>
             	{loading && <Message>Loading</Message>}
-            	{!loading && success &&  <Message>Form</Message>}
+            	{!loading && success &&  <ResetPasswordForm submit={this.submit} token={token} />}
             	{!loading && !success &&  <Message>Invalid Token</Message>}
             </div>
         );
@@ -40,4 +44,4 @@ ResetPasswordPage.propTypes = {
 	}).isRequired
 }
 
-export default connect(null,{validateToken})(ResetPasswordPage);
+export default connect(null,{validateToken,resetPassword})(ResetPasswordPage);

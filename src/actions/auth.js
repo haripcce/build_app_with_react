@@ -17,7 +17,9 @@ export const userLoggedOut = (user) => ({
 export const login = credentials => dispatch =>
 api.user.login(credentials).then(user => {
 	localStorage.bookwormJWT = user.token;
-	dispatch(userLoggedIn(user));
+	const payload = decode(localStorage.bookwormJWT)
+	const userData = {token:localStorage.bookwormJWT, email:payload.sub, confirmed:payload.confirmed };
+	dispatch(userLoggedIn(userData));
 
 })	
 
@@ -41,6 +43,9 @@ export const resetPasswordRequest = ({email}) => () =>
 
 export const validateToken = (token) => () =>
 	api.user.validate_token(token);
+
+export const resetPassword = (data) => () =>
+	api.user.reset_password(data);
 
 
 	
