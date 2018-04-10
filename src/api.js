@@ -7,6 +7,8 @@ export default {
 		signup : (user) => 
 		axios.post('/users/sign-up', user).then(res => res.data.user),
 		confirm : (token) => 
-		axios.post('/users/confirm', {token}).then(res => res.data.user)
+		axios.post('/users/confirm', {token}).then(res => res.data.user),
+		reset_PasswordRequest : ({email}) => 
+		axios.post('/users/reset_password_request', {email})
 	}
 }

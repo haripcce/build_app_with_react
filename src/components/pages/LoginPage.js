@@ -1,8 +1,11 @@
-import React  from 'react';
-import PropTypes from 'prop-types';
-import LoginForm from '../forms/LoginForm';
+import { Link } from 'react-router-dom';
 import {connect} from 'react-redux';
+import React  from 'react';
+
+import PropTypes from 'prop-types';
+
 import {login} from '../../actions/auth'
+import LoginForm from '../forms/LoginForm';
 
 class LoginPage extends React.Component {
 
@@ -12,6 +15,7 @@ class LoginPage extends React.Component {
 		return (
         <div><h1>Login Page</h1>
 			<LoginForm submit={this.submit} />
+			<Link to="/forgot_password">Forgot password</Link>
         </div>
     );
 	}
