@@ -62,17 +62,7 @@ class ResetPasswordForm extends Component {
 						onChange={this.onChange} />
 		     {errors.password && <InlineError text={errors.password} />} 
 		    </Form.Field>
-		    <Form.Field error={!!errors.email} >
-						<label htmlFor="passwordConfirmation">Confirm new Password</label>
-						<input 
-						placeholder='Confirm New Password' 
-						id="passwordConfirmation" 
-						type="password" 
-						name="passwordConfirmation"
-						value={data.passwordConfirmation}
-						onChange={this.onChange} />
-		     {errors.passwordConfirmation && <InlineError text={errors.passwordConfirmation} />} 
-		    </Form.Field>
+		   
             	<Button primary>Reset</Button>
             	</Form>
             </div>
