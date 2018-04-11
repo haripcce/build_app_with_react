@@ -14,5 +14,11 @@ export default {
 		axios.post('/users/validate_token', {token}),
 		reset_password:(data) => 
 		axios.post('/users/reset_password', data)
+	},
+	books:{
+		fetchAll: () => 
+		axios.get('/tasks').then(res => res.data.books),
+		create : (book) => 
+		axios.post('/tasks',book).then(res => res.data)
 	}
 }

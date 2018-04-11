@@ -3,6 +3,7 @@ import decode from 'jwt-decode';
 import { USER_LOGGED_IN, USER_LOGGED_OUT } from '../types';
 import { reset_PasswordRequest } from './auth';
 import api from '../api'
+import setAuthorizationHeader from '../utils/setAuthorizationHeader';
 
 //export const login = (credentials) => () =>api.user.login(credentials).then(res => res.data.user);
 
@@ -17,6 +18,7 @@ export const userLoggedOut = (user) => ({
 export const login = credentials => dispatch =>
 api.user.login(credentials).then(user => {
 	localStorage.bookwormJWT = user.token;
+	setAuthorizationHeader(localStorage.bookwormJWT);
 	const payload = decode(localStorage.bookwormJWT)
 	const userData = {token:localStorage.bookwormJWT, email:payload.sub, confirmed:payload.confirmed };
 	dispatch(userLoggedIn(userData));
@@ -25,6 +27,7 @@ api.user.login(credentials).then(user => {
 
 export const logout = () => dispatch =>{
 	localStorage.removeItem('bookwormJWT');
+	setAuthorizationHeader();
 	dispatch(userLoggedOut());
 
 
