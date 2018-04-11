@@ -27,11 +27,7 @@ class SearchBookForm extends Component {
    fetchOptions = () => {
    	//if(!this.state.query) return;
    	this.setState({loading:true});
-   	axios.get(`/tasks?query=${this.state.query}`,
-   		{headers: {
-        "Authorization" : `Bearer  ${this.props.token}`
-      }
-    })
+   	axios.get(`/tasks?query=${this.state.query}`)
    	.then(res => res.data.books)
    	.then(books => {
    		const options = [];
