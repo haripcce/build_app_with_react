@@ -51,6 +51,16 @@ class BookForm extends Component {
 		
 		return errors;
 	}
+	componentWillReceiveProps(props) {
+		this.setState({
+			data:{
+				goodreadsId : props.book.goodreadsId,
+				title : props.book.title,
+				pages : props.book.pages,
+				authors : props.book.authors
+				}
+		});
+	}
     render() {
     	const {loading , errors, data} = this.state;
         return (
