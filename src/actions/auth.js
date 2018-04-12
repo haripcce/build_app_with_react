@@ -4,13 +4,17 @@ import { USER_LOGGED_IN, USER_LOGGED_OUT } from '../types';
 import { reset_PasswordRequest } from './auth';
 import api from '../api'
 import setAuthorizationHeader from '../utils/setAuthorizationHeader';
-
-//export const login = (credentials) => () =>api.user.login(credentials).then(res => res.data.user);
+import { USER_FETCHED } from './../types';
 
 export const userLoggedIn = (user) => ({
 	type:USER_LOGGED_IN,
 	user
-})
+});
+
+export const userFetched = (user) => ({
+	type : 	USER_FETCHED,
+	user 
+	});
 
 export const userLoggedOut = (user) => ({
 	type:USER_LOGGED_OUT
@@ -20,7 +24,7 @@ api.user.login(credentials).then(user => {
 	localStorage.bookwormJWT = user.token;
 	setAuthorizationHeader(localStorage.bookwormJWT);
 	const payload = decode(localStorage.bookwormJWT)
-	const userData = {token:localStorage.bookwormJWT, email:payload.sub, confirmed:payload.confirmed };
+	const userData = {token:localStorage.bookwormJWT, email:payload.sub, confirmed:payload.confirmed,loaded:true };
 	dispatch(userLoggedIn(userData));
 
 })	

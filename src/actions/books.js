@@ -4,11 +4,12 @@ import { BOOKS_FETCHED } from '../types';
 import { bookSchema } from '../schemas';
 import api from '../api';
 
+
+export const createBook = (data) => (dispatch) => 
+api.books.create(data).then((book) => dispatch(bookCreated(normalize(book,bookSchema))));
+
 export const fetchBooks = () => (dispatch) => 
 api.books.fetchAll().then(books => dispatch(booksFetched(normalize(books,[bookSchema]))));
-
-
-
 
 const booksFetched = (data) => ({
 type : 	BOOKS_FETCHED,
@@ -20,5 +21,3 @@ type : 	BOOK_CREATED,
 data 
 });
 
-export const createBook = (data) => (dispatch) => 
-api.books.create(data).then((book) => dispatch(bookCreated(normalize(book,bookSchema))));

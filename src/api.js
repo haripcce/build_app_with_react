@@ -13,7 +13,9 @@ export default {
 		validate_token:(token) => 
 		axios.post('/users/validate_token', {token}),
 		reset_password:(data) => 
-		axios.post('/users/reset_password', data)
+		axios.post('/users/reset_password', data),
+		fetchCurrentUser:()=> 
+		axios.get('/users/me').then(res => res.data)
 	},
 	books:{
 		fetchAll: () => 

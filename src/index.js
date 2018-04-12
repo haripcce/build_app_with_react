@@ -11,7 +11,10 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { userLoggedIn } from './actions/auth';
+import { fetchCurrentUser } from './actions/users';
+
 import App from './App';
+import {userFetched} from './actions/auth';
 import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './rootReducer'
 import setAuthorizationHeader from './utils/setAuthorizationHeader';
@@ -21,10 +24,10 @@ const store = createStore(
 	composeWithDevTools(applyMiddleware(thunk)));
 
 if(localStorage.bookwormJWT){
-	const payload = decode(localStorage.bookwormJWT)
-	const user = {token:localStorage.bookwormJWT, email:payload.sub, confirmed:payload.confirmed };
-	store.dispatch(userLoggedIn(user));
 	setAuthorizationHeader(localStorage.bookwormJWT);
+	store.dispatch(fetchCurrentUser());
+}else{
+	store.dispatch(userFetched({}));
 }
 
 ReactDOM.render(

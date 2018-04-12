@@ -20,7 +20,7 @@ const HomePage = ({isAuthenticated, logout}) => (
     );
 function mapStateToProps(state){
 	return {
-		isAuthenticated:!!state.user.token
+		isAuthenticated:!!state.user.email
 	}
 }
 HomePage.propTypes = {
